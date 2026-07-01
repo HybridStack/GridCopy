@@ -58,12 +58,33 @@ Options are the same as the standard version. The UI launches automatically; you
 4. Toggle crop‑marks and safe‑zone guides.  
 5. Press **Export to PDF** to generate a printable PDF.
 
+### Web app (Streamlit)
+
+Deploy instantly on Streamlit Community Cloud:
+
+```bash
+streamlit run streamlit_app.py
+```
+
+Or deploy for free at [streamlit.io/cloud](https://streamlit.io/cloud) by connecting your GitHub repo.
+
 ## Project Structure
 
+- `streamlit_app.py` – Streamlit web app (deployable on Streamlit Cloud, Render, etc.)
 - `id_creator_premium.py` – Premium animated UI (Calm and Technical)  
 - `id_creator.py` – Standard CLI version  
+- `requirements.txt` – Python dependencies for the web app
 - `README.md` – This file  
-- `.gitignore` – Ignored files  
+
+## Deploy to Streamlit Cloud (free)
+
+1. Push this repo to GitHub
+2. Go to https://streamlit.io/cloud
+3. Sign in with GitHub and click **New app**
+4. Select this repo, branch `main`, file `streamlit_app.py`
+5. Click **Deploy** – done!
+
+Your app will be live at `https://<your-app>.streamlit.app`
 
 ## License
 
