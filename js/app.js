@@ -174,7 +174,7 @@ function render() {
 
   for (let i = 0; i < quantity; i++) {
     const row = Math.floor(i / COLS);
-    const col = i % COLS;
+    const col = currentView === "back" ? (COLS - 1 - (i % COLS)) : (i % COLS);
 
     const x = ox + scale * (gx + col * (CARD_W + gx));
     const y = oy + scale * (gy + row * (CARD_H + gy));
@@ -282,13 +282,16 @@ async function buildPDF() {
   if (frontData) images.push(frontData);
   if (backData) images.push(backData);
 
-  for (const imgData of images) {
+  for (let imgIdx = 0; imgIdx < images.length; imgIdx++) {
+    const imgData = images[imgIdx];
+    const reverseCol = imgIdx === 1; // reverse columns on back page for duplex long-edge
     let cardsPlaced = 0;
     while (cardsPlaced < quantity) {
       const page = doc.addPage([PAGE_W, PAGE_H]);
 
       for (let row = 0; row < ROWS && cardsPlaced < quantity; row++) {
-        for (let col = 0; col < COLS && cardsPlaced < quantity; col++) {
+        for (let c = 0; c < COLS && cardsPlaced < quantity; c++) {
+          const col = reverseCol ? (COLS - 1 - c) : c;
           const x = gx + col * (CARD_W + gx);
           const y = PAGE_H - (gy + (row + 1) * CARD_H + row * gy);
 
