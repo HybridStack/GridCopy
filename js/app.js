@@ -168,11 +168,9 @@ function render() {
   ctx.fill();
   ctx.stroke();
 
-  const bothLoaded = frontData && backData;
-  const frontImg = frontData ? new Image() : null;
-  const backImg = backData ? new Image() : null;
-  if (frontImg) frontImg.src = frontData.dataUrl;
-  if (backImg) backImg.src = backData.dataUrl;
+  const imgData = currentView === "front" ? frontData : backData;
+  const img = imgData ? new Image() : null;
+  if (imgData) img.src = imgData.dataUrl;
 
   for (let i = 0; i < quantity; i++) {
     const row = Math.floor(i / COLS);
@@ -189,11 +187,6 @@ function render() {
     roundRect(ctx, x, y, w, h, 4 * dpr);
     ctx.fill();
     ctx.stroke();
-
-    // col 0 = front, col 1 = back (when both loaded)
-    const useFront = bothLoaded ? col === 0 : currentView === "front";
-    const imgData = useFront ? frontData : backData;
-    const img = useFront ? frontImg : backImg;
 
     if (imgData && img?.complete) {
       try {
@@ -285,62 +278,57 @@ async function buildPDF() {
   const doc = await PDFDocument.create();
   const { gx, gy } = gapCalc();
 
-  const bothLoaded = frontData && backData;
-  const cardsPerPage = COLS * ROWS;
-  const totalPages = Math.ceil(quantity / cardsPerPage);
+  const images = [];
+  if (frontData) images.push(frontData);
+  if (backData) images.push(backData);
 
-  for (let p = 0; p < totalPages; p++) {
-    const page = doc.addPage([PAGE_W, PAGE_H]);
+  for (const imgData of images) {
+    let cardsPlaced = 0;
+    while (cardsPlaced < quantity) {
+      const page = doc.addPage([PAGE_W, PAGE_H]);
 
-    for (let i = 0; i < cardsPerPage; i++) {
-      const idx = p * cardsPerPage + i;
-      if (idx >= quantity) break;
+      for (let row = 0; row < ROWS && cardsPlaced < quantity; row++) {
+        for (let col = 0; col < COLS && cardsPlaced < quantity; col++) {
+          const x = gx + col * (CARD_W + gx);
+          const y = PAGE_H - (gy + (row + 1) * CARD_H + row * gy);
 
-      const row = Math.floor(i / COLS);
-      const col = i % COLS;
+          page.drawRectangle({
+            x, y, width: CARD_W, height: CARD_H,
+            borderColor: rgb(0.2, 0.2, 0.22),
+            borderWidth: 1,
+          });
 
-      const x = gx + col * (CARD_W + gx);
-      const y = PAGE_H - (gy + (row + 1) * CARD_H + row * gy);
+          try {
+            const resp = await fetch(imgData.dataUrl);
+            const blob = await resp.blob();
+            let img;
+            if (blob.type === "image/png") {
+              img = await doc.embedPng(await blob.arrayBuffer());
+            } else {
+              img = await doc.embedJpg(await blob.arrayBuffer());
+            }
+            const margin = 10;
+            const mw = CARD_W - 2 * margin;
+            const mh = CARD_H - 2 * margin;
+            const is = Math.min(mw / img.width, mh / img.height);
+            const nw = img.width * is;
+            const nh = img.height * is;
+            const ix = x + margin + (mw - nw) / 2;
+            const iy = y + (CARD_H - nh) / 2;
+            page.drawImage(img, { x: ix, y: iy, width: nw, height: nh });
+          } catch (_) {}
 
-      page.drawRectangle({
-        x, y, width: CARD_W, height: CARD_H,
-        borderColor: rgb(0.2, 0.2, 0.22),
-        borderWidth: 1,
-      });
-
-      // col 0 = front, col 1 = back (when both loaded)
-      const useFront = bothLoaded ? col === 0 : true;
-      const imgData = useFront ? frontData : backData;
-
-      if (imgData) {
-        try {
-          const resp = await fetch(imgData.dataUrl);
-          const blob = await resp.blob();
-          let img;
-          if (blob.type === "image/png") {
-            img = await doc.embedPng(await blob.arrayBuffer());
-          } else {
-            img = await doc.embedJpg(await blob.arrayBuffer());
+          if (showCrop) {
+            const mk = 10;
+            const cl = rgb(0.94, 0.27, 0.27);
+            for (const [dx, dy] of [[0, 0], [CARD_W, 0], [0, CARD_H], [CARD_W, CARD_H]]) {
+              const fx = x + dx, fy = y + dy;
+              page.drawLine({ start: { x: fx - mk, y: fy }, end: { x: fx + mk, y: fy }, color: cl, thickness: 1 });
+              page.drawLine({ start: { x: fx, y: fy - mk }, end: { x: fx, y: fy + mk }, color: cl, thickness: 1 });
+            }
           }
-          const margin = 10;
-          const mw = CARD_W - 2 * margin;
-          const mh = CARD_H - 2 * margin;
-          const is = Math.min(mw / img.width, mh / img.height);
-          const nw = img.width * is;
-          const nh = img.height * is;
-          const ix = x + margin + (mw - nw) / 2;
-          const iy = y + (CARD_H - nh) / 2;
-          page.drawImage(img, { x: ix, y: iy, width: nw, height: nh });
-        } catch (_) {}
-      }
 
-      if (showCrop) {
-        const mk = 10;
-        const cl = rgb(0.94, 0.27, 0.27);
-        for (const [dx, dy] of [[0, 0], [CARD_W, 0], [0, CARD_H], [CARD_W, CARD_H]]) {
-          const fx = x + dx, fy = y + dy;
-          page.drawLine({ start: { x: fx - mk, y: fy }, end: { x: fx + mk, y: fy }, color: cl, thickness: 1 });
-          page.drawLine({ start: { x: fx, y: fy - mk }, end: { x: fx, y: fy + mk }, color: cl, thickness: 1 });
+          cardsPlaced++;
         }
       }
     }
