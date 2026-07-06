@@ -1,6 +1,6 @@
 # GridCopy
 
-Create printable ID card PDFs from images. Works entirely in your browser — no server needed.
+Create printable ID card PDFs from images — 100% in your browser. No server, no install.
 
 ## Features
 
@@ -11,34 +11,27 @@ Create printable ID card PDFs from images. Works entirely in your browser — no
 - **PWA**: Installable, works offline on desktop & mobile
 - **Dark theme** with Linear-inspired indigo accents
 
-## Quick Start (Web)
+## Quick Start
 
-Open `index.html` in any browser, or deploy to GitHub Pages / Vercel / Netlify / Cloudflare Pages in 1 click.
+Open `index.html` in any browser, or visit the hosted version:
+
+**https://hybridstack.github.io/GridCopy/**
 
 ### Install as Desktop App
 
 - **Chrome/Edge**: Open → address bar → Install icon
 - **Mobile**: Open → Share → Add to Home Screen
 
-## Stack
-
-- **PWA**: `index.html`, `manifest.json`, `sw.js`, `css/style.css`, `js/app.js`
-- **Streamlit**: `streamlit_app.py` (deploy on Streamlit Cloud)
-- **Desktop Python**: `id_creator.py`, `id_creator_premium.py` (tkinter GUI)
-
 ## Project Structure
 
 ```
-├── index.html            # PWA entry (main app)
-├── manifest.json         # PWA manifest
-├── sw.js                 # Service worker (offline support)
-├── css/style.css         # Responsive styles
-├── js/app.js             # App logic (upload, preview, PDF export)
-├── icons/icon.svg        # App icon
-├── streamlit_app.py      # Streamlit web app
-├── id_creator.py         # Desktop CLI/GUI version
-├── id_creator_premium.py # Desktop premium GUI version
-├── requirements.txt      # Python deps
+├── index.html        # Main app entry
+├── manifest.json     # PWA manifest
+├── sw.js             # Service worker (offline)
+├── .nojekyll         # GitHub Pages config
+├── css/style.css     # Styles
+├── js/app.js         # App logic
+├── icons/icon.svg    # App icon
 └── README.md
 ```
 
@@ -50,7 +43,6 @@ Open `index.html` in any browser, or deploy to GitHub Pages / Vercel / Netlify /
 | **Cloudflare Pages** | Connect repo → auto-deploy |
 | **Vercel** | Import repo → deploy (static) |
 | **Netlify** | Import repo → deploy (static) |
-| **Streamlit Cloud** | Point to `streamlit_app.py` |
 
 ## License
 
