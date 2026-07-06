@@ -76,12 +76,17 @@ body {
   padding: 10px 16px;
   flex: 1;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .sidebar-body::-webkit-scrollbar { width: 3px; }
 .sidebar-body::-webkit-scrollbar-thumb { background: var(--border-focus); border-radius: 2px; }
 
 .section {
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 .section-title {
   font-size: 10px;
@@ -89,7 +94,6 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.8px;
   color: var(--text-tertiary);
-  margin-bottom: 5px;
 }
 
 /* ─── Upload Areas ─── */
@@ -101,7 +105,6 @@ body {
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
-  margin-bottom: 4px;
   background: var(--surface-elevated);
 }
 .upload-area:hover { border-color: var(--accent); background: var(--accent-muted); }
@@ -141,7 +144,8 @@ body {
 .btn-success { background: var(--success); color: #fff; }
 .btn-success:hover { background: #16a34a; }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-#btn-export { margin-bottom: 10px; }
+
+
 
 /* ─── View Toggle ─── */
 .view-toggle {
@@ -192,7 +196,6 @@ body {
 .row {
   display: flex;
   gap: 12px;
-  margin-bottom: 0;
 }
 .check-row {
   display: flex;
