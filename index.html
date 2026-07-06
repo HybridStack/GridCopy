@@ -14,24 +14,26 @@
 <body>
 <div id="app">
   <aside id="sidebar">
-    <div class="sidebar-header">
-      <h1>GridCopy</h1>
-      <p>ID Card PDF Maker</p>
+    <div class="sidebar-tabs">
+      <button class="tab active">GridCopy</button>
+      <button class="tab">ID Card PDF Maker</button>
     </div>
     <div class="sidebar-body">
+      <button class="btn btn-primary" id="btn-export">Export to PDF</button>
+
       <div class="section">
         <div class="section-title">Images</div>
         <div class="upload-area" id="front-area">
           <input type="file" id="front-input" accept="image/*" capture="environment">
           <div class="icon">🖼</div>
           <div class="label">Upload Front Image</div>
-          <div class="hint">Tap to browse, or drag &amp; drop</div>
+          <div class="hint">Tap or drag</div>
         </div>
         <div class="upload-area" id="back-area">
           <input type="file" id="back-input" accept="image/*" capture="environment">
           <div class="icon">🖼</div>
           <div class="label">Upload Back Image</div>
-          <div class="hint">Tap to browse, or drag &amp; drop</div>
+          <div class="hint">Tap or drag</div>
         </div>
       </div>
 
@@ -44,37 +46,23 @@
       </div>
 
       <div class="section">
-        <div class="section-title">Number of Copies</div>
+        <div class="section-title">Copies</div>
         <div class="qty-row" id="qty-row">
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-title">Options</div>
+      <div class="row">
         <label class="check-row">
           <input type="checkbox" id="chk-crop">
           <span class="checkmark"></span>
-          Show crop marks
+          Crop marks
         </label>
         <label class="check-row">
           <input type="checkbox" id="chk-safe">
           <span class="checkmark"></span>
-          Show safe zone
+          Safe zone
         </label>
       </div>
-
-      <div class="section">
-        <div class="section-title">Layout Info</div>
-        <div class="info-box">
-          3.5" × 2.25" cards<br>
-          2 × 5 grid (10/page)<br>
-          Copies: <span id="info-qty">10</span><br>
-          Front: <span id="info-front">❌ Not loaded</span><br>
-          Back: <span id="info-back">❌ Not loaded</span>
-        </div>
-      </div>
-
-      <button class="btn btn-primary" id="btn-export">Export to PDF</button>
     </div>
   </aside>
   <div id="sidebar-overlay"></div>

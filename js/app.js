@@ -245,11 +245,6 @@ function roundRect(ctx, x, y, w, h, r) {
 }
 
 function updateInfo() {
-  const front = frontData ? "✅" : "❌";
-  const back = backData ? "✅" : "❌";
-  $("#info-qty").textContent = quantity;
-  $("#info-front").textContent = `${front} ${frontData ? "Loaded" : "Not loaded"}`;
-  $("#info-back").textContent = `${back} ${backData ? "Loaded" : "Not loaded"}`;
   $("#header-count").textContent = `${quantity} card${quantity === 1 ? "" : "s"}`;
 }
 
