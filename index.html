@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<meta name="theme-color" content="#6366f1">
+<meta name="description" content="GridCopy - Create printable ID card PDFs from images. Free, offline-capable PWA.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon.svg">
+<title>GridCopy - ID Card PDF Maker</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <h1>GridCopy</h1>
+      <p>ID Card PDF Maker</p>
+    </div>
+    <div class="sidebar-body">
+      <div class="section">
+        <div class="section-title">Images</div>
+        <div class="upload-area" id="front-area">
+          <input type="file" id="front-input" accept="image/*" capture="environment">
+          <div class="icon">🖼</div>
+          <div class="label">Upload Front Image</div>
+          <div class="hint">Tap to browse, or drag &amp; drop</div>
+        </div>
+        <div class="upload-area" id="back-area">
+          <input type="file" id="back-input" accept="image/*" capture="environment">
+          <div class="icon">🖼</div>
+          <div class="label">Upload Back Image</div>
+          <div class="hint">Tap to browse, or drag &amp; drop</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">View</div>
+        <div class="view-toggle">
+          <button data-view="front" class="active">Front</button>
+          <button data-view="back">Back</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Number of Copies</div>
+        <div class="qty-row" id="qty-row">
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Options</div>
+        <label class="check-row">
+          <input type="checkbox" id="chk-crop">
+          <span class="checkmark"></span>
+          Show crop marks
+        </label>
+        <label class="check-row">
+          <input type="checkbox" id="chk-safe">
+          <span class="checkmark"></span>
+          Show safe zone
+        </label>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Layout Info</div>
+        <div class="info-box">
+          3.5" × 2.25" cards<br>
+          2 × 5 grid (10/page)<br>
+          Copies: <span id="info-qty">10</span><br>
+          Front: <span id="info-front">❌ Not loaded</span><br>
+          Back: <span id="info-back">❌ Not loaded</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="btn-export">Export to PDF</button>
+    </div>
+  </aside>
+  <div id="sidebar-overlay"></div>
+
+  <main id="main">
+    <div id="main-header">
+      <h2>Preview</h2>
+      <span id="header-count">10 cards</span>
+    </div>
+    <div id="preview-wrap">
+      <canvas id="preview-canvas"></canvas>
+    </div>
+  </main>
+</div>
+<button id="sidebar-toggle">☰</button>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

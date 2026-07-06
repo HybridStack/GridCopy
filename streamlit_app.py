@@ -5,7 +5,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.utils import ImageReader
 
-st.set_page_config(page_title="ID Creator Pro", page_icon="🪪", layout="wide")
+st.set_page_config(page_title="GridCopy Pro", page_icon="🪪", layout="wide")
 
 CARD_W_INCHES = 3.5
 CARD_H_INCHES = 2.25
@@ -133,7 +133,7 @@ def generate_pdf_bytes(front_img_data, back_img_data, qty):
     return buf
 
 
-st.title("ID Creator Pro")
+st.title("GridCopy Pro")
 st.markdown("Upload images and generate printable A4 PDF sheets of ID cards.")
 
 # Initialize session state

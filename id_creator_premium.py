@@ -380,7 +380,7 @@ class IDCreatorApp(ctk.CTk):
         self._calculate_gaps()
         
         # Window setup
-        self.title("ID Creator Pro - Print Ready")
+        self.title("GridCopy Pro - Print Ready")
         self.geometry("1200x800")
         self.configure(fg_color=tokens.bg)
         
@@ -417,7 +417,7 @@ class IDCreatorApp(ctk.CTk):
         
         ctk.CTkLabel(
             header,
-            text="ID Creator Pro",
+            text="GridCopy Pro",
             font=tokens.font_xl,
             text_color=tokens.text_primary
         ).pack(anchor="w")

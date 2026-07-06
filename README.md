@@ -1,95 +1,57 @@
-# ID Creator
+# GridCopy
 
-A Python GUI application that creates printable ID cards from images and exports them to PDF. 
-Features a modern “Calm and Technical” UI with smooth animations, hover/press feedback, and a dark‑themed design inspired by Linear.
+Create printable ID card PDFs from images. Works entirely in your browser — no server needed.
 
 ## Features
 
-- **Standard CLI mode** (`id_creator.py`) – choose card size, grid layout, and run in headless mode.
-- **Animated premium UI** (`id_creator_premium.py`) – rich UI with:
-  - Entrance and hover animations for cards
-  - Toast notifications and progress rings
-  - Particle background effect
-  - Clip‑board‑style glassmorphism styling
-  - Copies selector (1‑10 buttons)
-- A4‑ready layout – 2 × 5 grid (10 cards per page) with automatic gap calculations.
-- Export to PDF – high‑quality PDF generation using `reportlab`.
-- Dark theme with indigo/purple/cyan accent colors and AA‑contrast text.
+- Upload front/back images (drag & drop, file picker, or camera)
+- 2×5 A4 grid layout (10 cards per page)
+- Crop marks & printer safe zone guides
+- Export to high-quality PDF
+- **PWA**: Installable, works offline on desktop & mobile
+- **Dark theme** with Linear-inspired indigo accents
 
-## Requirements
+## Quick Start (Web)
 
-- Python 3.8+
-- Packages: `customtkinter`, `Pillow`, `reportlab`
+Open `index.html` in any browser, or deploy to GitHub Pages / Vercel / Netlify / Cloudflare Pages in 1 click.
 
-Install with:
+### Install as Desktop App
 
-```bash
-pip install customtkinter Pillow reportlab
-```
+- **Chrome/Edge**: Open → address bar → Install icon
+- **Mobile**: Open → Share → Add to Home Screen
 
-## Usage
+## Stack
 
-### Standard version (CLI)
-
-```bash
-python id_creator.py [options]
-```
-
-Options:
-
-- `--card-w WIDTH` – Card width in inches (default: 3.5)
-- `--card-h HEIGHT` – Card height in inches (default: 2.25)
-- `--cols COLS` – Number of columns (default: 2)
-- `--rows ROWS` – Number of rows (default: 5)
-- `--cli` – Run in CLI mode (shows configuration only)
-- `--help` – Show this help message
-
-### Premium animated version
-
-```bash
-python id_creator_premium.py [options]
-```
-
-Options are the same as the standard version. The UI launches automatically; you can:
-
-1. Load front and/or back images.  
-2. Choose the view (Front / Back) with the segmented button.  
-3. Set the number of copies (1‑10) via the quick buttons or the input field.  
-4. Toggle crop‑marks and safe‑zone guides.  
-5. Press **Export to PDF** to generate a printable PDF.
-
-### Web app (Streamlit)
-
-Deploy instantly on Streamlit Community Cloud:
-
-```bash
-streamlit run streamlit_app.py
-```
-
-Or deploy for free at [streamlit.io/cloud](https://streamlit.io/cloud) by connecting your GitHub repo.
+- **PWA**: `index.html`, `manifest.json`, `sw.js`, `css/style.css`, `js/app.js`
+- **Streamlit**: `streamlit_app.py` (deploy on Streamlit Cloud)
+- **Desktop Python**: `id_creator.py`, `id_creator_premium.py` (tkinter GUI)
 
 ## Project Structure
 
-- `streamlit_app.py` – Streamlit web app (deployable on Streamlit Cloud, Render, etc.)
-- `id_creator_premium.py` – Premium animated UI (Calm and Technical)  
-- `id_creator.py` – Standard CLI version  
-- `requirements.txt` – Python dependencies for the web app
-- `README.md` – This file  
+```
+├── index.html            # PWA entry (main app)
+├── manifest.json         # PWA manifest
+├── sw.js                 # Service worker (offline support)
+├── css/style.css         # Responsive styles
+├── js/app.js             # App logic (upload, preview, PDF export)
+├── icons/icon.svg        # App icon
+├── streamlit_app.py      # Streamlit web app
+├── id_creator.py         # Desktop CLI/GUI version
+├── id_creator_premium.py # Desktop premium GUI version
+├── requirements.txt      # Python deps
+└── README.md
+```
 
-## Deploy to Streamlit Cloud (free)
+## Deploy for Free
 
-1. Push this repo to GitHub
-2. Go to https://streamlit.io/cloud
-3. Sign in with GitHub and click **New app**
-4. Select this repo, branch `main`, file `streamlit_app.py`
-5. Click **Deploy** – done!
-
-Your app will be live at `https://<your-app>.streamlit.app`
+| Platform | How |
+|----------|-----|
+| **GitHub Pages** | Push repo → Settings → Pages → source: `main`, root |
+| **Cloudflare Pages** | Connect repo → auto-deploy |
+| **Vercel** | Import repo → deploy (static) |
+| **Netlify** | Import repo → deploy (static) |
+| **Streamlit Cloud** | Point to `streamlit_app.py` |
 
 ## License
 
-MIT License – see the `LICENSE` file (if present) or add your own.
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
+MIT

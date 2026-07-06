@@ -61,8 +61,8 @@ class IDApp(ctk.CTk):
         # Calculate margins to center the grid on the page
         self._calculate_gaps()
 
-        # UI Setup
-        self.title("ID Creator Pro - Print Ready")
+        # ============== UI Setup ==============
+        self.title("GridCopy Pro - Print Ready")
         self.geometry("1200x850")
         ctk.set_appearance_mode("dark")
         
