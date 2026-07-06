@@ -20,3 +20,10 @@ index.html    manifest.json    sw.js    css/style.css    js/app.js    icons/icon
 ## License
 
 MIT
+
+## Contact
+
+- **WhatsApp**: [+923017322984](https://wa.me/923017322984)
+- **X / Twitter**: [@cryptotariq](https://x.com/cryptotariq)
+- **Facebook**: [@cryptotariq](https://facebook.com/cryptotariq)
+- **Instagram**: [@cryptotariq](https://instagram.com/cryptotariq)

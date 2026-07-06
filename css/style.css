@@ -252,6 +252,24 @@ body {
   box-shadow: 0 8px 40px rgba(0,0,0,0.5);
 }
 
+/* ─── Social Footer ─── */
+.sidebar-footer {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.social-link {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.15s;
+  line-height: 1;
+}
+.social-link:hover { color: var(--accent-hover); }
+
 /* ─── Mobile Toggle ─── */
 #sidebar-toggle {
   display: none;
